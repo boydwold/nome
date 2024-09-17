@@ -87,14 +87,12 @@ let
     elixir
     elixir-ls
     gleam
-    jelly
     mprocs
     neofetch
     ngrok
     process-compose
     protobuf
     reattach-to-user-namespace # for tmux
-    uuidv7
     yt-dlp
   ];
 
@@ -108,15 +106,6 @@ let
   pythonTools = with pkgs; [ python311 ] ++ (with pkgs.python311Packages; [
     httpie
   ]);
-
-  rustTools = with pkgs; [
-    bacon
-    rustToolchain
-    cargo-edit
-    cargo-machete
-    cargo-watch
-    rust-analyzer
-  ];
 
   scripts = with pkgs; [
     (writeScriptBin "pk" ''
@@ -154,7 +143,6 @@ basic
 ++ misc
 ++ nixTools
 ++ pythonTools
-++ rustTools
 ++ scripts
 ++ security
 ++ docsTools

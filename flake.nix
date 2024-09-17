@@ -13,7 +13,6 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2405.*";
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*";
     nuenv = { url = "https://flakehub.com/f/DeterminateSystems/nuenv/0.1.*"; inputs.nixpkgs.follows = "nixpkgs"; };
-    uuidv7 = { url = "git+ssh://git@github.com/DeterminateSystems/uuidv7.git"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
   outputs = inputs:
@@ -29,7 +28,7 @@
 
       stateVersion = "24.05";
       system = "aarch64-darwin";
-      username = "lucperkins";
+      username = "boydwold";
       caches = {
         nixos-org = {
           cache = "https://cache.nixos.org";
@@ -72,22 +71,12 @@
         rev = inputs.self.rev or inputs.self.dirtyRev or null;
         fh = inputs.fh.packages.${system}.default;
         flake-checker = inputs.flake-checker.packages.${system}.default;
-        jelly = inputs.jelly.packages.${system}.default;
-        uuidv7 = inputs.uuidv7.packages.${system}.default;
-        rustToolchain = with inputs.fenix.packages.${system};
-          combine (with stable; [
-            cargo
-            clippy
-            rustc
-            rustfmt
-            rust-src
-          ]);
 
         # Packages from Nixpkgs unstable
         gleam = inputs.nixpkgs-unstable.legacyPackages.${system}.gleam;
       };
 
-      darwinConfigurations."${username}-${system}" = inputs.nix-darwin.lib.darwinSystem {
+      darwinConfigurations."boyds-macbook" = inputs.nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
           inputs.determinate.darwinModules.default
